@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <Quickblox/Quickblox.h>
 
-@interface fontechFirstViewController : UIViewController
+@interface fontechFirstViewController : UIViewController <QBActionStatusDelegate>
 
 @end

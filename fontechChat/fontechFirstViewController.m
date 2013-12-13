@@ -17,6 +17,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    [QBAuth createSessionWithDelegate:self];
+    [QBUsers logInWithUserLogin:@"fontech" password:@"computer1"  delegate:self];
 	// Do any additional setup after loading the view, typically from a nib.
 }
 
@@ -24,6 +26,15 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)completedWithResult:(Result *)result{
+    if(result.success && [result isKindOfClass:QBAAuthSessionCreationResult.class]){
+        // Success, You have got Application session, now READ something
+    } else if (result.success && [result isKindOfClass:QBUUserLogInResult.class]) {
+        QBUUserLogInResult *userResult = (QBUUserLogInResult *)result;
+        NSLog(@"Logged In user=%@", userResult.user);
+    }
 }
 
 @end
